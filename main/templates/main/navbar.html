@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="{% url 'home' %}">Home</a>
+      {% if user.is_authenticated %}
+      <span class="hello-msg" style="color: red; margin-right: 9px; margin-top: 8.5px;">Hello, {{ request.user }} </span>
+      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'logout' %}">Logout</a>
+      {% if user.is_authenticated and user.is_staff %}
+      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'admin:index' %}">Админка</a>
+      {% endif %}
+      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'customer_profile' %}">Профиль заказичка</a>
+      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'contractor_profile' %}">Профиль исполнителя</a>
+      {% else %}
+      <a class="nav-item nav-link active" href="{% url 'login' %}">Login</a>
+      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'register_user' %}">Register</a>
+      {% endif %}
+
+    </div>
+  </div>
+</nav>

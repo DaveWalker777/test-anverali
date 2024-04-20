@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Профиль исполнителя
+{% endblock %}
+
+{% block content %}
+    <h1 style="color: blue; margin-left: 7px;">Профиль исполнителя</h1>
+    {% if form %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.name }}<br>
+        {{ form.surname }}<br>
+        {{ form.experience }}<br>
+        {{ form.email }}<br>
+        {{ form.phone_number }}<br>
+        <button type="submit" class="btn btn-success">Добавить</button>
+    </form>
+    {% else %}
+    {% if contractor %}
+    <p style="margin-left: 10px;">Информация об исполнителе:</p>
+    <p style="margin-left: 10px;">Имя: {{ contractor.name }}</p>
+    <p style="margin-left: 10px;">Фамилия: {{ contractor.surname }}</p>
+    <p style="margin-left: 10px;">Опыт: {{ contractor.experience }}</p>
+    <p style="margin-left: 10px;">Email: {{ contractor.email }}</p>
+    <p style="margin-left: 10px;">Телефон: {{ contractor.phone_number }}</p>
+ <a href="{% url 'contractor_update' %}" class="btn btn-primary" style="margin-left: 5px;">Редактировать профиль</a>
+    {% endif %}
+    {% endif %}
+    {% if error %}
+    <p style="color: red; margin-left: 2px;">{{ error }}</p>
+    {% endif %}
+    {{ form.non_field_errors }}
+    {{ form.name.errors }}
+    {{ form.surname.errors }}
+    {{ form.experience.errors }}
+    {{ form.email.errors }}
+    {{ form.phone_number.errors }}
+
+{% endblock %}

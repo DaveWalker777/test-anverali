@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Профиль заказчика
+{% endblock %}
+
+{% block content %}
+    <h1 style="color: red; margin-left: 7px">Профиль заказчика</h1>
+    {% if form %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.name }}<br>
+        {{ form.surname }}<br>
+        {{ form.email }}<br>
+        {{ form.phone_number }}<br>
+        <button type="submit" class="btn btn-success">Добавить</button>
+    </form>
+    {% else %}
+    {% if customer %}
+    <p style="margin-left: 10px;">Информация о заказчике:</p>
+    <p style="margin-left: 10px;">Имя: {{ customer.name }}</p>
+    <p style="margin-left: 10px;">Фамилия: {{ customer.surname }}</p>
+    <p style="margin-left: 10px;">Email: {{ customer.email }}</p>
+    <p style="margin-left: 10px;">Телефон: {{ customer.phone_number }}</p>
+ <a href="{% url 'customer_update' %}" class="btn btn-danger" style="margin-left: 5px;">Редактировать профиль</a>
+    {% endif %}
+    {% endif %}
+    {% if error %}
+    <p style="color: red; margin-left: 7px">{{ error }}</p>
+    {% endif %}
+    {{ form.non_field_errors }}
+    {{ form.name.errors }}
+    {{ form.surname.errors }}
+    {{ form.email.errors }}
+    {{ form.phone_number.errors }}
+
+{% endblock %}
