@@ -3,24 +3,6 @@ from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
 
-class CustomerFormStatus(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    form_submitted = models.BooleanField(default=False)
-
-    class Meta:
-        verbose_name = 'Статус формы '
-        verbose_name_plural = 'Статус форм заказчиков'
-
-
-class ContractorFormStatus(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    form_submitted = models.BooleanField(default=False)
-
-    class Meta:
-        verbose_name = 'Статус формы'
-        verbose_name_plural = 'Статус форм исполнителей'
-
-
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField('Имя', max_length=50)
